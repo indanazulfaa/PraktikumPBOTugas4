@@ -1,0 +1,80 @@
+package tugas4Pbo;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        
+       Scanner input = new Scanner(System.in);
+        System.out.println("====== Selamat Datang Di UBFood ======");
+        DataMerchant.merc = DataMerchant.tambahMerchant(new Merchant("Bakso Pak Sahid", "Bakso", 8000));
+        DataMerchant.merc = DataMerchant.tambahMerchant(new Merchant("Nasgor Mblebes", "Nasi Goreng Jawa", 10000));
+        DataMerchant.merc = DataMerchant.tambahMerchant(new Merchant("Ayam Geprek Kak Ros", "Ayam Kota Ekstra Nasi", 10000));
+
+        DataMerchant.tampilData();
+        System.out.println();
+        System.out.println("==== Pilih Menu Tindakan ====");
+        System.out.println("1. Tambah Merchant");
+        System.out.println("2. Cari Merchant");
+        System.out.println("3. Update Merchant\n");
+        System.out.print("Pilih : ");
+        int pilih = input.nextInt();
+        
+        switch (pilih){
+            
+        case 1 : 
+        
+        input.nextLine();
+        System.out.println();
+        System.out.println("## Menambahkan Data Merchant Melalui Input ##");
+        System.out.println("---------------------------------------------");
+        System.out.print("Masukkan Nama Merchant\t : ");
+        String namaMerchant = input.nextLine();
+        System.out.print("Masukkan Nama Produk\t : ");
+        String namaProduk = input.nextLine();
+        System.out.print("Masukkan Harga Makanan\t : ");
+        double hargaMakanan = input.nextDouble();
+        System.out.println("---------------------------------------------");
+        
+        DataMerchant.merc = DataMerchant.tambahMerchant(new Merchant(namaMerchant, namaProduk, hargaMakanan));
+        System.out.println();
+        DataMerchant.tampilData();
+        break;
+        
+        case 2 : 
+            System.out.println("Apakah Anda Mau Mencari Merchant ? (y/t)");
+            String nm = input.nextLine();
+            if(nm.equalsIgnoreCase("t")){
+            }else{
+                System.out.print("Cari merchant   : ");
+                String nama = input.nextLine();
+                System.out.println();
+                if(DataMerchant.cariMerchant(nama) == null){
+                    System.out.println("Merchant tidak diketahui");
+                }else{
+                    DataMerchant.tampilMerchant(DataMerchant.cariMerchant(nama));
+                }
+            }
+            break;
+            
+        case 3:
+        System.out.println("Apakah Anda Mau Update Merchant ? (y/t)");
+        input.nextLine();
+        String jawaban = input.nextLine();
+            if(jawaban.equalsIgnoreCase("t")){
+                DataMerchant.tampilData();
+            }else{
+                System.out.print("Cari merchant   : ");
+                String nama = input.nextLine();
+                if(DataMerchant.cariMerchant(nama) == null){
+                    System.out.println("Merchant tidak diketahui");
+                }else{
+                    DataMerchant.updateMerchant(DataMerchant.cariMerchant(nama));
+                }
+            }
+        break;
+        default:
+    }
+    
+    }
+}
